@@ -23,7 +23,8 @@
 clear all;
 
 plotting_wanted = false; %if you want to plot, set to true
-saving_wanted = true; %if you want to save, set to true
+saving_wanted = false; %if you want to save, set to true
+
 
 
 %% -------------------------- Initialisation ------------------------------
@@ -50,7 +51,7 @@ BetaIndex = table();
 AvgShort = table();
     
 
-for part = 1:totalgraphs
+for part = 1%:totalgraphs
     
     %Create and reset the variables in the loop
     NodeDegree = [];
@@ -168,11 +169,11 @@ overviewIndices.AvgShortestPath = AvgShort.AverageShortestPath;
 
 if saving_wanted == true
     
-    save([savepath 'HierarchyIndex_Table.mat'],'HierarchyIndex');
+    save([savepath_Table 'HierarchyIndex_Table.mat'],'HierarchyIndex');
     disp('Saved HierarchyIndex_Table');
-    save([savepath 'BetaIndex_Table.mat'],'BetaIndex');
+    save([savepath_Beta 'BetaIndex_Table.mat'],'BetaIndex');
     disp('Saved BetaIndex_Table');
-    save([savepath 'AvgShortestPath.mat'],'AvgShort');
+    save([savepath_Avg 'AvgShortestPath.mat'],'AvgShort');
     disp('Saved AvgShortestPath');
     
 end
