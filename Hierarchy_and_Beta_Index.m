@@ -37,11 +37,11 @@ saving_wanted = false; %if you want to save, set to true
 
 %% -------------------------- Initialisation ------------------------------
 
-p = what;
-p = p.path;
+path = what;
+path = path.path;
 
 %savepaths
-savepath = strcat(p,'/Results/HierarchyIndex/');
+savepath = strcat(path,'/Results/HierarchyIndex/');
 
 % cd into graph folder location
 cd graphs;

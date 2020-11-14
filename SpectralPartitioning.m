@@ -27,16 +27,16 @@
 
 clear all;
 
-plotting_wanted = false; %if you want to plot, set to true
-saving_wanted = true; %if you want to save, set to true
+plotting_wanted = false; % if you want to plot, set to true
+saving_wanted = false; % if you want to save, set to true
 
 %% -------------------------- Initialisation ------------------------------
 
-p = what;
-p = p.path;
+path = what;
+path = path.path;
 
-%savepaths
-savepath = strcat(p,'/Results/SpectralPartitioning/');
+%savepath
+savepath = strcat(path,'/Results/SpectralPartitioning/');
 
 % cd into graph folder location
 cd graphs;
@@ -200,14 +200,14 @@ eigenvalue3L = [];
       % Plotting the Adjacency Matrix based on the sorting distribution of  
       % the second smallest Eigenvector 
       % (Spy Matrix or Sparse Pattern Matrix)
-        [ignore, p] = sort(eigenvector2L);
+        [ignore, path] = sort(eigenvector2L);
         figure('Name',strcat('Part_',currentPart,'_AdjacencySpy'));
-        sortedAdj = AdjacencyMatrix(p,p);
+        sortedAdj = AdjacencyMatrix(path,path);
         spy(sortedAdj);
         
       % Split into pos and neg part 
-        p_neg = p(ignore<=0);
-        p_pos = p(ignore>0);
+        p_neg = path(ignore<=0);
+        p_pos = path(ignore>0);
         
         Adj_neg = sortedAdj;
         Adj_neg(p_pos,p_pos) = 0;
@@ -312,9 +312,9 @@ eigenvalue3L = [];
                     currentPart,'.png'),'png'); 
             end
             %Investigating the Adjacency Matrix:
-            [ignore,p] = sort(eigenvector3L);
+            [ignore,path] = sort(eigenvector3L);
             figure('Name',strcat('Part_',currentPart,'_AdjacencySpy'));
-            spy(AdjacencyMatrix(p,p));
+            spy(AdjacencyMatrix(path,path));
             
             if saving_wanted == true
                 saveas(gcf,strcat(savepath,...
@@ -366,7 +366,6 @@ eigenvalue3L = [];
             end
 end
 
-disp('Done');
-
-clearvars '-except' Cut_Edges Doc HierarchyIndex overviewIndices;
+clearvars '-except' Cut_Edges Doc;
    
+disp('Done');
