@@ -1,6 +1,15 @@
+%% -------------------- Hierarchy_Beta_ShortestPath -----------------------
+
+% -------------------- written by Lucas Essmann - 2020 --------------------
+% ---------------------- lessmann@uni-osnabrueck.de -----------------------
+
 %Hierarchy index and Beta index
 %Calculating the Hierarchy Index, the Beta Index and the average shortest
 %path
+
+% Requirements:
+% undirected, unweighted graphs with Edges and Nodes Table 
+% The Edges Table needs to contain an EndNodes column
 
 %--------------------------------------------------------------------------
 %Hierarchy Index: 
@@ -23,7 +32,7 @@
 clear all;
 
 plotting_wanted = false; %if you want to plot, set to true
-saving_wanted = true; %if you want to save, set to true
+saving_wanted = false; %if you want to save, set to true
 
 
 %% -------------------------- Initialisation ------------------------------
@@ -32,16 +41,16 @@ p = what;
 p = p.path;
 
 %savepaths
-savepath = strcat(p,'/HierarchyIndex/');
+savepath = strcat(p,'/Results/HierarchyIndex/');
 
-%Graphfolder location
+% cd into graph folder location
 cd graphs;
 
 %graphfolder
 PartList = dir();
 PartList = struct2cell(PartList);
 %reduce the folder to the graphs only
-PartList = PartList(1,3:end-2);
+PartList = PartList(1,3:end);
 % amount of graphs
 totalgraphs = length(PartList);
 
@@ -49,7 +58,7 @@ HierarchyIndex = table();
 BetaIndex = table();
 AvgShort = table();
     
-
+%% ----------------------------- Main -------------------------------------
 for part = 1:totalgraphs
     
     %Create and reset the variables in the loop
@@ -125,7 +134,11 @@ for part = 1:totalgraphs
     if plotting_wanted == true
     
         figgy = figure();
-        scatter(log(UniqueDegree),log(DegreeFrequency),300,[0.24,0.15,0.66],'filled');
+        scatter(log(UniqueDegree),...
+            log(DegreeFrequency),...
+            300,...
+            [0.24,0.15,0.66],...
+            'filled');
         hold on;
         plotty = fplot(@(x) f2.a*x+f2.b,...
             [min(UniqueDegreeMed),max(UniqueDegreeMed)],...
@@ -136,12 +149,17 @@ for part = 1:totalgraphs
         rectangle('Position',[0 0 4 4],'LineWidth',1.5);
 
 
-        plotty = plot(f2,log(UniqueDegree),log(DegreeFrequency),[min(DegreeFrequencyMed),max(DegreeFrequencyMed)]);
+        plotty = plot(f2,...
+            log(UniqueDegree),...
+            log(DegreeFrequency),...
+            [min(DegreeFrequencyMed),max(DegreeFrequencyMed)]);
         xlabel('Degree'); ylabel('Frequency');
         set(gca,'FontName','Helvetica','FontSize',40,'FontWeight','bold')
         
     if saving_wanted == true
-         saveas(gcf,strcat(savepath_fig,'Med_Hierarchy_Fit_Part',currentPart,'.png'),'png');
+         saveas(gcf,strcat(savepath_fig,...
+             'Med_Hierarchy_Fit_Part',...
+             currentPart,'.png'),'png');
     end
 
          close(figgy);
@@ -180,4 +198,3 @@ end
 disp('Done');
 
 clearvars '-except' AvgShort BetaIndex HierarchyIndex overviewIndices;
-
