@@ -252,6 +252,8 @@ if saving_wanted == true
     save([savepath 'Mean_RichClub.mat'],'MeanRichClub');
 end
 
-clearvars '-except' RichT MeanRichClub;
+clearvars '-except' ...
+    RichT ...
+    MeanRichClub;
 
 disp('Done');

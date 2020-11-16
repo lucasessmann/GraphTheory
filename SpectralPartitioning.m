@@ -366,6 +366,8 @@ eigenvalue3L = [];
             end
 end
 
-clearvars '-except' Cut_Edges Doc;
+clearvars '-except' ...
+    Cut_Edges ...
+    Doc;
    
 disp('Done');
