@@ -145,6 +145,7 @@ eigenvalue3L = [];
     %Documentation:
     Doc.meanEigVec(part,:) = mean(eigenvector2L);
     Doc.stdEigVec(part,:) = std(eigenvector2L);
+    Doc.Eigenvalue2L(part,:) = eigenvalue2L;
   
     Cut_Edges.Part(part,:) = currentPart;
     Cut_Edges.TotalEdges(part,:) = numedges(graphy);
@@ -363,6 +364,7 @@ eigenvalue3L = [];
 
             if saving_wanted == true
                 save([savepath 'CutEdges.mat'],'Cut_Edges');
+                save([savepath 'SpectralDocumentation.mat'],'Doc');
             end
 end
 
